@@ -28,7 +28,7 @@ void tambahDataSiswa() {
     cin >> jumlahSiswa;
     cin.ignore();
 
-    ofstream fileOutput("Datasiswa.txt",ios::app);
+    ofstream fileOutput("Siswa.txt",ios::app);
 
     for(int i=0;i<jumlahSiswa;i++) {
     siswa data;
@@ -68,7 +68,7 @@ void tambahDataSiswa() {
 }//menambahkan data (sudah)
 
 void tampilDataSiswa(){
-    ifstream fileOutput("Datasiswa.txt");
+    ifstream fileOutput("Siswa.txt");
     string baris;
 
     while(getline(fileOutput,baris)){
