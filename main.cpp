@@ -17,6 +17,11 @@ struct siswa{
     nilai Nilai; // struct in struct
 };
 
+float nilaiAkhir(nilai n){
+    return (n.Mtk*0.4)+(n.BIn*0.2)+(n.IPA*0.3)+(n.BIn*0.2);
+    
+};
+
 void tambahDataSiswa() {
     int jumlahSiswa;
     cout << "Berapa banyak siswa yang ingin anda tambahkan? ";
@@ -74,11 +79,6 @@ void tampilDataSiswa(){
 }//membaca data dari file (sudah)
 
 void cariSiswa();// berdasarkan NISN (belum)
-
-float nilaiAkhir(nilai n){
-    return (n.Mtk*0.4)+(n.BIn*0.2)+(n.IPA*0.3)+(n.BIn*0.2);
-    
-};// nilai akhir = 40%matematika+30%IPA+20%B indonesia +20%B Inggris(belum)
 
 void ranking(); // menampilkan data siswa berdasarkan peringkatnya(belum)
 
