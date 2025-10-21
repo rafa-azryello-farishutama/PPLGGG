@@ -60,7 +60,7 @@ void tambahDataSiswa() {
     fileOutput.close();
     cout << "Data Tersimpan"<<endl;
 
-}//menambahkan data pada file siswa.txt
+}//menambahkan data (sudah)
 
 void tampilDataSiswa(){
     ifstream fileOutput("Datasiswa.txt");
@@ -71,19 +71,33 @@ void tampilDataSiswa(){
     }
 
     fileOutput.close();
-}//membaca data dari file siswa.txt dan ditampilkan
+}//membaca data dari file (sudah)
 
-void cariSiswa();// berdasarkan NISN
+void cariSiswa();// berdasarkan NISN (belum)
 
 float nilaiAkhir(nilai n){
     return (n.Mtk*0.4)+(n.BIn*0.2)+(n.IPA*0.3)+(n.BIn*0.2);
     
-};// nilai akhir = 40%matematika+30%IPA+20%B indonesia +20%B Inggris
+};// nilai akhir = 40%matematika+30%IPA+20%B indonesia +20%B Inggris(belum)
 
-void ranking(); // menampilkan data siswa berdasarkan peringkatnya
+void ranking(); // menampilkan data siswa berdasarkan peringkatnya(belum)
 
 int main()
 {
-    tampilDataSiswa();
+    int menu;
+    cout << "Masukkan Menu"<<endl;
+    cout << "1. Tambah Data Siswa" << endl;
+    cout << "2. Tampil Data Siswa" << endl;
+    cout << "Pilih menu : ";
+    cin >> menu;
+
+    if(menu==1){
+        tambahDataSiswa();
+    }
+
+    if(menu==2){
+        tampilDataSiswa();
+    }
     return 0;
-}
+} //program ini belum selesai, yang baru selesai hanyalah fungsi Tambah Data Siswa dan Tampil Data Siswa
+
