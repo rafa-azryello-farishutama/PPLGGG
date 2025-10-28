@@ -84,6 +84,7 @@ void tampilDataSiswa(){
 }//membaca data dari file (sudah)
 
 void cariSiswa(){
+   void cariSiswa() {
     ifstream fileInput("Siswa.txt");
     if (!fileInput.is_open()) {
         cout << "File belum ada atau tidak bisa dibuka!" << endl;
@@ -97,25 +98,55 @@ void cariSiswa(){
     string baris;
     bool ditemukan = false;
 
-    cout << "Hasil Pencarian" << endl;
-    while (getline(fileInput, baris)) {
-        if (baris.find("NISN : " + katakunci) != string::npos) {
-            ditemukan = true;
-            cout << baris << endl;
+    cout << "\n=== Hasil Pencarian ===" << endl;
 
-            for (int i = 0; i < 3 && getline(fileInput, baris); i++) {
-                cout << baris << endl;
+    while (getline(fileInput, baris)) {
+        if (baris.size() >= 4 && 
+            baris[0] == 'N' && baris[1] == 'a' && baris[2] == 'm' && baris[3] == 'a') {
+
+            string nisn_ditemukan = "";
+            int i = 0;
+
+            while (i < baris.size() - 3) {
+                if (baris[i] == 'N' && baris[i + 1] == 'I' && 
+                    baris[i + 2] == 'S' && baris[i + 3] == 'N') {
+                    i += 7; 
+
+                    while (i < baris.size() && baris[i] != ' ' && baris[i] != '-') {
+                        nisn_ditemukan = nisn_ditemukan + baris[i];
+                        i++;
+                    }
+                    break;
+                }
+                i++;
             }
 
-            cout << endl;
+            bool sama = true;
+            if (nisn_ditemukan.size() != katakunci.size()) {
+                sama = false;
+            } else {
+                for (int k = 0; k < katakunci.size(); k++) {
+                    if (nisn_ditemukan[k] != katakunci[k]) {
+                        sama = false;
+                        break;
+                    }
+                }
+            }
+
+            if (sama) {
+                ditemukan = true;
+                cout << baris << endl;
+
+                for (int j = 0; j < 3 && getline(fileInput, baris); j++) {
+                    cout << baris << endl;
+                }
+
+                cout << endl;
+            }
         }
     }
+}
 
-    if (!ditemukan) {
-        cout << "Data dengan NISN " << katakunci << " tidak ditemukan." << endl;
-    }
-
-    fileInput.close();
 };// berdasarkan NISN (sudah)
 
 void ranking(); // menampilkan data siswa berdasarkan peringkatnya(belum)
