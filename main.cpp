@@ -71,6 +71,11 @@ void tampilDataSiswa(){
     ifstream fileOutput("Siswa.txt");
     string baris;
 
+    if(!fileOutput.is_open()){
+        cout << "File belum ada atau tidak bisa dibuka!" << endl;
+        return;
+    }
+
     while(getline(fileOutput,baris)){
         cout << baris << endl;
     }
@@ -78,7 +83,40 @@ void tampilDataSiswa(){
     fileOutput.close();
 }//membaca data dari file (sudah)
 
-void cariSiswa();// berdasarkan NISN (belum)
+void cariSiswa(){
+    ifstream fileInput("Siswa.txt");
+    if (!fileInput.is_open()) {
+        cout << "File belum ada atau tidak bisa dibuka!" << endl;
+        return;
+    }
+
+    string katakunci;
+    cout << "Masukkan NISN yang ingin dicari: ";
+    getline(cin, katakunci);
+
+    string baris;
+    bool ditemukan = false;
+
+    cout << "Hasil Pencarian" << endl;
+    while (getline(fileInput, baris)) {
+        if (baris.find("NISN : " + katakunci) != string::npos) {
+            ditemukan = true;
+            cout << baris << endl;
+
+            for (int i = 0; i < 3 && getline(fileInput, baris); i++) {
+                cout << baris << endl;
+            }
+
+            cout << endl;
+        }
+    }
+
+    if (!ditemukan) {
+        cout << "Data dengan NISN " << katakunci << " tidak ditemukan." << endl;
+    }
+
+    fileInput.close();
+};// berdasarkan NISN (sudah)
 
 void ranking(); // menampilkan data siswa berdasarkan peringkatnya(belum)
 
@@ -88,8 +126,10 @@ int main()
     cout << "Masukkan Menu"<<endl;
     cout << "1. Tambah Data Siswa" << endl;
     cout << "2. Tampil Data Siswa" << endl;
+    cout << "3. Cari Berdasarkan NISN"<<endl;
     cout << "Pilih menu : ";
     cin >> menu;
+    cin.ignore();
 
     if(menu==1){
         tambahDataSiswa();
@@ -98,6 +138,11 @@ int main()
     if(menu==2){
         tampilDataSiswa();
     }
+
+    if(menu==3){
+        cariSiswa();
+    }
+
     return 0;
 } //program ini belum selesai, yang baru selesai hanyalah fungsi Tambah Data Siswa dan Tampil Data Siswa
 
